@@ -353,6 +353,19 @@ serverGreetings.541484311354933258.message[] = Second line of the greeting.
 Whether to show the [responseMessage](#responseMessage) sent to the user in the thread channel on the inbox server as well.  
 If you have a multi-line or otherwise long `responseMessage`, it might be a good idea to turn this off to reduce clutter.
 
+#### threadsInsteadOfChannels
+**Default:** `off`
+Whether to use [thread channels](https://discord.com/developers/docs/topics/threads) instead of text channels in a category.
+If this is enabled, then the [categoryAutomation.newThread](#categoryAutomation.newThread) should be a text channel instead of a category channel.
+
+#### defaultNewThreadMode
+**Default:** `public`
+The default type of Discord thread to create when using the `!newthread` command. Requires [threadsInsteadOfChannels](#threadsInsteadOfChannels) to be `on`.
+
+#### threadAutoArchiveDuration
+**Default:** 1440
+The auto archive duration of the Discord thread channel in minutes. One of `60`, `1440`, `4320`, or `10080`.
+
 #### smallAttachmentLimit
 **Default:** `2097152`  
 Size limit of `relaySmallAttachmentsAsAttachments` in bytes (default is 2MB)
