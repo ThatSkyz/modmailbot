@@ -36,8 +36,10 @@ module.exports = ({ bot, knex, config, commands }) => {
       ignoreRequirements: true,
       ignoreHooks: true,
       source: "command",
-      private: args.mode === "private",
+      private: args.mode === "private" && config.threadsInsteadOfChannels,
     });
+
+    await bot.joinThread(createdThread.channel_id, msg.author.id);
 
     createdThread.postSystemMessage(`Thread was opened by ${msg.author.username}#${msg.author.discriminator}`);
 
