@@ -5,6 +5,7 @@ const erisEndpoints = require("../../node_modules/eris/lib/rest/Endpoints");
 
 module.exports = ({ bot, knex, config, commands }) => {
   if (! config.allowMove) return;
+  if (config.threadsInsteadOfChannels) return;
 
   commands.addInboxThreadCommand("move", "<category:string$>", async (msg, args, thread) => {
     const searchStr = args.category;

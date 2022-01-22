@@ -98,6 +98,7 @@ async function createNewThreadForUser(user, opts = {}) {
     const quiet = opts.quiet != null ? opts.quiet : false;
     const ignoreRequirements = opts.ignoreRequirements != null ? opts.ignoreRequirements : false;
     const ignoreHooks = opts.ignoreHooks != null ? opts.ignoreHooks : false;
+    const private = opts.private;
 
     const existingThread = await findOpenThreadByUserId(user.id);
     if (existingThread) {
@@ -208,7 +209,7 @@ async function createNewThreadForUser(user, opts = {}) {
         createdChannel = await bot.createThreadWithoutMessage(newThreadCategoryId, {
           name: `${user.username}-${user.discriminator} - ${user.id}`,
           autoArchiveDuration: autoArchiveDuration,
-          type: DISCORD_CHANNEL_TYPES.PUBLIC_THREAD,
+          type: private ? DISCORD_CHANNEL_TYPES.GUILD_PRIVATE_THREAD : DISCORD_CHANNEL_TYPES.GUILD_PUBLIC_THREAD,
         });
       } else {
         createdChannel = await utils.getInboxGuild().createChannel(channelName, DISCORD_CHANNEL_TYPES.GUILD_TEXT, {

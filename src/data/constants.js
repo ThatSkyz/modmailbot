@@ -26,7 +26,8 @@ module.exports = {
     GUILD_CATEGORY: 4,
     GUILD_NEWS: 5,
     GUILD_STORE: 6,
-    PUBLIC_THREAD: 11,
+    GUILD_PUBLIC_THREAD: 11,
+    GUILD_PRIVATE_THREAD: 12,
   },
 
   // https://discord.com/developers/docs/resources/channel#message-object-message-activity-types

@@ -13,7 +13,7 @@ const { getModeratorThreadDisplayRoleName } = require("./displayRoles");
 
 const ThreadMessage = require("./ThreadMessage");
 
-const {THREAD_MESSAGE_TYPE, THREAD_STATUS, DISCORD_MESSAGE_ACTIVITY_TYPES} = require("./constants");
+const {THREAD_MESSAGE_TYPE, THREAD_STATUS, DISCORD_MESSAGE_ACTIVITY_TYPES, DISCORD_CHANNEL_TYPES} = require("./constants");
 
 /**
  * @property {String} id
@@ -627,7 +627,9 @@ class Thread {
           archived: true,
           locked: true,
         });
-        await bot.deleteMessage(channel.parentID, channel.id, "Thread closed");
+        if (channel.type === DISCORD_CHANNEL_TYPES.GUILD_PUBLIC_THREAD) { 
+          await bot.deleteMessage(channel.parentID, channel.id, "Thread closed");
+        }
       } else {
         console.log(`Deleting channel ${this.channel_id}`);
         await channel.delete("Thread closed");

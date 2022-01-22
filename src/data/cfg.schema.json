@@ -383,6 +383,12 @@
       "default": false
     },
 
+    "defaultNewThreadMode": {
+      "type": "string",
+      "enum": ["public", "private"],
+      "default": "public"
+    },
+
     "threadAutoArchiveDuration": {
       "type": "number",
       "enum": [60, 1440, 4320, 10080],

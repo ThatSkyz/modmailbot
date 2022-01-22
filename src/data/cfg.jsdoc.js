@@ -70,6 +70,7 @@
  * @property {boolean} [pinThreadHeader=false]
  * @property {boolean} [showResponseMessageInThreadChannel=true]
  * @property {boolean} [threadsInsteadOfChannels=false]
+ * @property {"public"|"private"} [defaultNewThreadMode="public"]
  * @property {60|1440|4320|10080} [threadAutoArchiveDuration=1440]
  * @property {string} [logStorage="local"]
  * @property {object} [logOptions]
