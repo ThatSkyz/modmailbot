@@ -378,6 +378,17 @@
       "default": true
     },
 
+    "threadsInsteadOfChannels": {
+      "$ref": "#/definitions/customBoolean",
+      "default": false
+    },
+
+    "threadAutoArchiveDuration": {
+      "type": "number",
+      "enum": [60, 1440, 4320, 10080],
+      "default": 1440
+    },
+
     "logStorage": {
       "type": "string",
       "default": "local"

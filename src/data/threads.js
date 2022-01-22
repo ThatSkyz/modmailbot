@@ -14,7 +14,7 @@ const updates = require("./updates");
 
 const Thread = require("./Thread");
 const {callBeforeNewThreadHooks} = require("../hooks/beforeNewThread");
-const {THREAD_STATUS, DISOCRD_CHANNEL_TYPES} = require("./constants");
+const {THREAD_STATUS, DISCORD_CHANNEL_TYPES} = require("./constants");
 
 const MINUTES = 60 * 1000;
 const HOURS = 60 * MINUTES;
@@ -199,13 +199,23 @@ async function createNewThreadForUser(user, opts = {}) {
       newThreadCategoryId = config.categoryAutomation.newThread;
     }
 
+    let autoArchiveDuration = config.threadAutoArchiveDuration || 1440;
+
     // Attempt to create the inbox channel for this thread
     let createdChannel;
     try {
-      createdChannel = await utils.getInboxGuild().createChannel(channelName, DISOCRD_CHANNEL_TYPES.GUILD_TEXT, {
-        reason: "New Modmail thread",
-        parentID: newThreadCategoryId,
-      });
+      if (config.threadsInsteadOfChannels) {
+        createdChannel = await bot.createThreadWithoutMessage(newThreadCategoryId, {
+          name: `${user.username}-${user.discriminator} - ${user.id}`,
+          autoArchiveDuration: autoArchiveDuration,
+          type: DISCORD_CHANNEL_TYPES.PUBLIC_THREAD,
+        });
+      } else {
+        createdChannel = await utils.getInboxGuild().createChannel(channelName, DISCORD_CHANNEL_TYPES.GUILD_TEXT, {
+          reason: "New Modmail thread",
+          parentID: newThreadCategoryId,
+        });
+      }
     } catch (err) {
       console.error(`Error creating modmail channel for ${user.username}#${user.discriminator}!`);
       throw err;

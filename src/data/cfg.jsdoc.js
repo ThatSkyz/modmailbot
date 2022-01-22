@@ -69,6 +69,8 @@
  * @property {string} [autoAlertDelay="2m"] Delay before auto-alert kicks in. Uses the same format as timed close; for example 1m30s for 1 minute and 30 seconds.
  * @property {boolean} [pinThreadHeader=false]
  * @property {boolean} [showResponseMessageInThreadChannel=true]
+ * @property {boolean} [threadsInsteadOfChannels=false]
+ * @property {60|1440|4320|10080} [threadAutoArchiveDuration=1440]
  * @property {string} [logStorage="local"]
  * @property {object} [logOptions]
  * @property {string} logOptions.attachmentDirectory

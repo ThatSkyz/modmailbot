@@ -621,8 +621,17 @@ class Thread {
     // Delete channel
     const channel = bot.getChannel(this.channel_id);
     if (channel) {
-      console.log(`Deleting channel ${this.channel_id}`);
-      await channel.delete("Thread closed");
+      if (config.threadsInsteadOfChannels) {
+        console.log(`Archiving channel ${this.channel_id}`);
+        await channel.edit({
+          archived: true,
+          locked: true,
+        });
+        await bot.deleteMessage(channel.parentID, channel.id, "Thread closed");
+      } else {
+        console.log(`Deleting channel ${this.channel_id}`);
+        await channel.delete("Thread closed");
+      }
     }
 
     await callAfterThreadCloseHooks({ threadId: this.id });
